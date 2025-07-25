@@ -11,9 +11,8 @@ export const Participants = () => {
   const users = useOthers();
   const currentUser = useSelf();
   const hasMoreUsers = users.length > MAX_SHOWN_USERS;
-
   return (
-    <div className="absolute h-12 top-2 right-2 bg-white rounded-md p-3 flex items-center shadow-md">
+    <div className="absolute h-12 top-4 right-4 bg-slate-900/80 backdrop-blur-xl rounded-xl p-3 flex items-center shadow-2xl border border-slate-600/30">
       <div className="flex gap-x-2">
         {users.slice(0, MAX_SHOWN_USERS)
           .map(({ connectionId, info }) => {
@@ -50,6 +49,12 @@ export const Participants = () => {
 
 export const ParticipantsSkeleton = () => {
   return (
-    <div className="absolute h-12 top-2 right-2 bg-white rounded-md p-3 flex items-center shadow-md w-[100px]" />
+    <div className="absolute h-12 top-4 right-4 bg-slate-900/80 backdrop-blur-xl rounded-xl p-3 flex items-center shadow-2xl border border-slate-600/30 w-[120px] animate-pulse">
+      <div className="flex gap-x-2">
+        <div className="w-8 h-8 bg-slate-700 rounded-full"></div>
+        <div className="w-8 h-8 bg-slate-700 rounded-full"></div>
+        <div className="w-8 h-8 bg-slate-700 rounded-full"></div>
+      </div>
+    </div>
   );
 };

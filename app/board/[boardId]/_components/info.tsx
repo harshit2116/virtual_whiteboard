@@ -41,38 +41,34 @@ export const Info = ({
   });
 
   if (!data) return <InfoSkeleton />;
-
   return (
-    <div className="absolute top-2 left-2 bg-white rounded-md px-1.5 h-12 flex items-center shadow-md">
+    <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-xl rounded-xl px-4 h-12 flex items-center shadow-2xl border border-slate-600/30">
       <Hint label="Go to boards" side="bottom" sideOffset={10}>
-        <Button asChild variant="board" className="px-2">
-          <Link href="/">
-            <Image
-              src="/logo.svg"
-              alt="Board logo"
-              height={40}
-              width={40}
-            />
+        <Button asChild variant="ghost" className="px-3 hover:bg-slate-700/50 text-white">
+          <Link href="/" className="flex items-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center mr-2">
+              <div className="w-4 h-4 bg-white rounded-sm"></div>
+            </div>
             <span className={cn(
-              "font-semibold text-xl ml-2 text-black",
+              "font-semibold text-lg text-white",
               font.className,
             )}>
-              Board
+              Takhta
             </span>
           </Link>
         </Button>
       </Hint>
-      <TabSeparator />
+      <div className="text-slate-400 px-2">|</div>
       <Hint label="Edit title" side="bottom" sideOffset={10}>
         <Button
-          variant="board"
-          className="text-base font-normal px-2"
+          variant="ghost"
+          className="text-base font-normal px-3 text-white hover:bg-slate-700/50"
           onClick={() => onOpen(data._id, data.title)}
         >
           {data.title}
         </Button>
       </Hint>
-      <TabSeparator />
+      <div className="text-slate-400 px-2">|</div>
       <Actions
         id={data._id}
         title={data.title}
@@ -81,7 +77,7 @@ export const Info = ({
       >
         <div>
           <Hint label="Main menu" side="bottom" sideOffset={10}>
-            <Button size="icon" variant="board">
+            <Button size="icon" variant="ghost" className="text-white hover:bg-slate-700/50">
               <Menu />
             </Button>
           </Hint>
@@ -94,7 +90,14 @@ export const Info = ({
 export const InfoSkeleton = () => {
   return (
     <div 
-      className="absolute top-2 left-2 bg-white rounded-md px-1.5 h-12 flex items-center shadow-md w-[300px]"
-    />
+      className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-xl rounded-xl px-4 h-12 flex items-center shadow-2xl border border-slate-600/30 w-[300px] animate-pulse"
+    >
+      <div className="w-8 h-8 bg-slate-700 rounded-lg mr-2"></div>
+      <div className="w-20 h-4 bg-slate-700 rounded mr-2"></div>
+      <div className="text-slate-400 px-2">|</div>
+      <div className="w-24 h-4 bg-slate-700 rounded mr-2"></div>
+      <div className="text-slate-400 px-2">|</div>
+      <div className="w-6 h-6 bg-slate-700 rounded"></div>
+    </div>
   );
 };
