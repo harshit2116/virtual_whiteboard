@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./mobile.css";
 import { Suspense } from "react";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -8,7 +9,6 @@ import { ConvexClientProvider } from "@/providers/convex-client-provider";
 import { ModalProvider } from "@/providers/modal-provider";
 import { Loading } from "@/components/auth/loading";
 import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
-import { PWADebug } from "@/components/pwa-debug";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,10 +53,8 @@ export default function RootLayout({
         <Suspense fallback={<Loading />}>
           <ConvexClientProvider>
             <Toaster />
-            <ModalProvider />
-            {children}
+            <ModalProvider />            {children}
             <PWAInstallPrompt />
-            <PWADebug />
           </ConvexClientProvider>
         </Suspense>
       </body>

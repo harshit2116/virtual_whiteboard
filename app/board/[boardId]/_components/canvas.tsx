@@ -37,6 +37,7 @@ import { useDeleteLayers } from "@/hooks/use-delete-layers";
 import { Info } from "./info";
 import { Path } from "./path";
 import { Toolbar } from "./toolbar";
+import { MobileToolbar } from "./mobile-toolbar";
 import { Participants } from "./participants";
 import { LayerPreview } from "./layer-preview";
 import { SelectionBox } from "./selection-box";
@@ -442,14 +443,20 @@ export const Canvas = ({
     return () => {
       document.removeEventListener("keydown", onKeyDown)
     }
-  }, [deleteLayers, history]);
-  return (
+  }, [deleteLayers, history]);  return (
     <main
-      className="h-full w-full relative bg-gradient-to-br from-slate-50 via-white to-slate-100 touch-none"
-    >
-      <Info boardId={boardId} />
+      className="h-full w-full relative bg-gradient-to-br from-slate-50 via-white to-slate-100 touch-none overflow-hidden"
+    >      <Info boardId={boardId} />
       <Participants />
       <Toolbar
+        canvasState={canvasState}
+        setCanvasState={setCanvasState}
+        canRedo={canRedo}
+        canUndo={canUndo}
+        undo={history.undo}
+        redo={history.redo}
+      />
+      <MobileToolbar
         canvasState={canvasState}
         setCanvasState={setCanvasState}
         canRedo={canRedo}
@@ -460,9 +467,8 @@ export const Canvas = ({
       <SelectionTools
         camera={camera}
         setLastUsedColor={setLastUsedColor}
-      />
-      <svg
-        className="h-[100vh] w-[100vw]"
+      />      <svg
+        className="h-screen w-screen max-h-screen max-w-screen"
         onWheel={onWheel}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}

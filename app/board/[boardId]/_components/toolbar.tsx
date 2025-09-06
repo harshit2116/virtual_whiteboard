@@ -30,7 +30,7 @@ export const Toolbar = ({
   canUndo,
   canRedo,
 }: ToolbarProps) => {  return (
-    <div className="absolute top-[50%] -translate-y-[50%] left-4 flex flex-col gap-y-4">
+    <div className="absolute top-[50%] -translate-y-[50%] left-4 flex flex-col gap-y-4 hidden md:flex">
       <div className="bg-slate-900/80 backdrop-blur-xl rounded-xl p-3 flex gap-y-2 flex-col items-center shadow-2xl border border-slate-600/30">
         <ToolButton
           label="Select"
