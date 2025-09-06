@@ -10,6 +10,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": ["node"],
     "jsx": "preserve",
     "incremental": true,
     "plugins": [

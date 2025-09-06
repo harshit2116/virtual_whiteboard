@@ -22,23 +22,27 @@ export const SelectionBox = memo(({
   const isShowingHandles = useStorage((root) => 
     soleLayerId && root.layers.get(soleLayerId)?.type !== LayerType.Path
   );
+
   const bounds = useSelectionBounds();
 
   if (!bounds) {
     return null;
   }
 
+  // Type assertion to work around TypeScript inference issues
+  const typedBounds = bounds as any;
+
   return (
     <>
       <rect
         className="fill-transparent stroke-blue-500 stroke-1 pointer-events-none"
         style={{
-          transform: `translate(${bounds.x}px, ${bounds.y}px)`,
+          transform: `translate(${typedBounds.x}px, ${typedBounds.y}px)`,
         }}
         x={0}
         y={0}
-        width={bounds.width}
-        height={bounds.height}
+        width={typedBounds.width}
+        height={typedBounds.height}
       />
       {isShowingHandles && (
         <>
@@ -52,14 +56,14 @@ export const SelectionBox = memo(({
               height: `${HANDLE_WIDTH}px`,
               transform: `
                 translate(
-                  ${bounds.x - HANDLE_WIDTH / 2}px,
-                  ${bounds.y - HANDLE_WIDTH / 2}px
+                  ${typedBounds.x - HANDLE_WIDTH / 2}px,
+                  ${typedBounds.y - HANDLE_WIDTH / 2}px
                 )
               `
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              onResizeHandlePointerDown(Side.Top + Side.Left, bounds);
+              onResizeHandlePointerDown(Side.Top + Side.Left, typedBounds);
             }}
           />
           <rect
@@ -72,14 +76,14 @@ export const SelectionBox = memo(({
               height: `${HANDLE_WIDTH}px`,
               transform: `
                 translate(
-                  ${bounds.x + bounds.width / 2 - HANDLE_WIDTH / 2}px, 
-                  ${bounds.y - HANDLE_WIDTH / 2}px
+                  ${typedBounds.x + typedBounds.width / 2 - HANDLE_WIDTH / 2}px, 
+                  ${typedBounds.y - HANDLE_WIDTH / 2}px
                 )
               `
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              onResizeHandlePointerDown(Side.Top, bounds);
+              onResizeHandlePointerDown(Side.Top, typedBounds);
             }}
           />
           <rect
@@ -92,13 +96,13 @@ export const SelectionBox = memo(({
               height: `${HANDLE_WIDTH}px`,
               transform: `
                 translate(
-                  ${bounds.x - HANDLE_WIDTH / 2 + bounds.width}px,
-                  ${bounds.y - HANDLE_WIDTH / 2}px
+                  ${typedBounds.x - HANDLE_WIDTH / 2 + typedBounds.width}px,
+                  ${typedBounds.y - HANDLE_WIDTH / 2}px
                 )`
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              onResizeHandlePointerDown(Side.Top + Side.Right, bounds);
+              onResizeHandlePointerDown(Side.Top + Side.Right, typedBounds);
             }}
           />
           <rect
@@ -111,13 +115,13 @@ export const SelectionBox = memo(({
               height: `${HANDLE_WIDTH}px`,
               transform: `
                 translate(
-                  ${bounds.x - HANDLE_WIDTH / 2 + bounds.width}px, 
-                  ${bounds.y + bounds.height / 2 - HANDLE_WIDTH / 2}px
+                  ${typedBounds.x - HANDLE_WIDTH / 2 + typedBounds.width}px, 
+                  ${typedBounds.y + typedBounds.height / 2 - HANDLE_WIDTH / 2}px
                 )`
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              onResizeHandlePointerDown(Side.Right, bounds);
+              onResizeHandlePointerDown(Side.Right, typedBounds);
             }}
           />
           <rect
@@ -130,13 +134,13 @@ export const SelectionBox = memo(({
               height: `${HANDLE_WIDTH}px`,
               transform: `
                 translate(
-                  ${bounds.x - HANDLE_WIDTH / 2 + bounds.width}px, 
-                  ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px
+                  ${typedBounds.x - HANDLE_WIDTH / 2 + typedBounds.width}px, 
+                  ${typedBounds.y - HANDLE_WIDTH / 2 + typedBounds.height}px
                 )`
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              onResizeHandlePointerDown(Side.Bottom + Side.Right, bounds);
+              onResizeHandlePointerDown(Side.Bottom + Side.Right, typedBounds);
             }}
           />
           <rect
@@ -149,13 +153,13 @@ export const SelectionBox = memo(({
               height: `${HANDLE_WIDTH}px`,
               transform: `
                 translate(
-                  ${bounds.x + bounds.width / 2 - HANDLE_WIDTH / 2}px,
-                  ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px
+                  ${typedBounds.x + typedBounds.width / 2 - HANDLE_WIDTH / 2}px,
+                  ${typedBounds.y - HANDLE_WIDTH / 2 + typedBounds.height}px
                 )`
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              onResizeHandlePointerDown(Side.Bottom, bounds);
+              onResizeHandlePointerDown(Side.Bottom, typedBounds);
             }}
           />
           <rect
@@ -168,13 +172,13 @@ export const SelectionBox = memo(({
               height: `${HANDLE_WIDTH}px`,
               transform: `
                 translate(
-                  ${bounds.x - HANDLE_WIDTH / 2}px,
-                  ${bounds.y - HANDLE_WIDTH / 2 + bounds.height}px
+                  ${typedBounds.x - HANDLE_WIDTH / 2}px,
+                  ${typedBounds.y - HANDLE_WIDTH / 2 + typedBounds.height}px
                 )`
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              onResizeHandlePointerDown(Side.Bottom + Side.Left, bounds);
+              onResizeHandlePointerDown(Side.Bottom + Side.Left, typedBounds);
             }}
           />
           <rect
@@ -187,13 +191,13 @@ export const SelectionBox = memo(({
               height: `${HANDLE_WIDTH}px`,
               transform: `
                 translate(
-                  ${bounds.x - HANDLE_WIDTH / 2}px,
-                  ${bounds.y - HANDLE_WIDTH / 2 + bounds.height / 2}px
+                  ${typedBounds.x - HANDLE_WIDTH / 2}px,
+                  ${typedBounds.y - HANDLE_WIDTH / 2 + typedBounds.height / 2}px
                 )`
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              onResizeHandlePointerDown(Side.Left, bounds);
+              onResizeHandlePointerDown(Side.Left, typedBounds);
             }}
           />
         </>

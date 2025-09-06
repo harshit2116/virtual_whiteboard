@@ -1,3 +1,13 @@
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: false, // Enable PWA in development for testing
+  fallbacks: {
+    document: '/offline.html'
+  }
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: (config) => {
@@ -18,4 +28,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig);
